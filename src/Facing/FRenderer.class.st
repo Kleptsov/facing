@@ -1,7 +1,7 @@
 Class {
 	#name : #FRenderer,
 	#superclass : #Object,
-	#category : #Facing
+	#category : #'Facing-Core'
 }
 
 { #category : #rendering }

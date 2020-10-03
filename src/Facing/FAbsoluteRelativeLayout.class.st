@@ -7,7 +7,7 @@ Class {
 		'box',
 		'direction'
 	],
-	#category : #Facing
+	#category : #'Facing-Core'
 }
 
 { #category : #examples }

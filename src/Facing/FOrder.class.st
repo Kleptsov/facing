@@ -7,12 +7,12 @@ Class {
 		'model',
 		'morph'
 	],
-	#category : #Facing
+	#category : #'Facing-Core'
 }
 
 { #category : #initialization }
 FOrder >> initializeMorph [
-	morph := Morph new.
+	morph := FMorph new.
 	morph layoutPolicy: (FAbsoluteRelativeLayout new direction: #rightDown).
 ]
 
