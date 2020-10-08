@@ -7,7 +7,7 @@ Class {
 		'box',
 		'direction'
 	],
-	#category : #'Facing-Core'
+	#category : #'Facing-Morphs'
 }
 
 { #category : #examples }
@@ -268,7 +268,7 @@ FAbsoluteRelativeLayout >> rightDownLayout: aSubmorph [
 
 { #category : #layout }
 FAbsoluteRelativeLayout >> rightUp: aSubmorph [
-	"укладка справа потом вниз"
+	"укладка справа потом вверх"
 
 	"уложить морф"
 

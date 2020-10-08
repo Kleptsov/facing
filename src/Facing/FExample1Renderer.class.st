@@ -8,16 +8,6 @@ Class {
 	#category : #'Facing-Example'
 }
 
-{ #category : #rendering }
-FExample1Renderer >> closeButtonMorph [
-	^ PluggableButtonMorph
-		on: nil
-		getState: nil
-		action:  [ self ownerMorph delete ]"#action "
-		label: 'close'"#label"
-		menu: nil. 	
-]
-
 { #category : #accessing }
 FExample1Renderer >> model [
 	^ model

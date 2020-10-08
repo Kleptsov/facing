@@ -12,7 +12,7 @@ Class {
 		'textField',
 		'morph'
 	],
-	#category : #'Facing-Example'
+	#category : #'Facing-Morphs'
 }
 
 { #category : #creating }
@@ -89,7 +89,9 @@ FLabeledText >> acceptAction: anObject [
 
 { #category : #initialization }
 FLabeledText >> initializeLabel [
-	labelMorph := StringMorph contents: self label
+	labelMorph := StringMorph contents: self label.
+	labelMorph extent: 100@17.
+	labelMorph hResizing: #spaceFill.
 ]
 
 { #category : #initialization }
@@ -97,17 +99,20 @@ FLabeledText >> initializeMorph [
 	self initializeLabel.
 	self initializeTextField.
 	self
-		layoutPolicy: (AAbsoluteRelativeLayout new direction: #rightUp);
+		layoutPolicy: (AAbsoluteRelativeLayout new direction: #rightDown);
 		extent: 300@60;
-		addMorph: textField;
 		addMorph: labelMorph;
+		addMorph: textField;
 		color: (self color alpha: 0.0).
 ]
 
 { #category : #initialization }
 FLabeledText >> initializeTextField [
 	textField := ATextField on: textModel text: text accept: accept acceptAction: acceptAction.
-	textField setProperty: #relativeExtent toValue: 1.0@0.5. 
+	"textField setProperty: #relativeExtent toValue: 1.0@0.5. "
+	textField extent: 10@17.
+	textField vResizing: #spaceFill.
+	textField hResizing: #spaceFill. 
 ]
 
 { #category : #accessing }
