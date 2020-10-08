@@ -2,11 +2,21 @@ Class {
 	#name : #FExample1Renderer,
 	#superclass : #Object,
 	#instVars : [
-		'model',
-		'order'
+		'ownerMorph',
+		'model'
 	],
 	#category : #'Facing-Example'
 }
+
+{ #category : #rendering }
+FExample1Renderer >> closeButtonMorph [
+	^ PluggableButtonMorph
+		on: nil
+		getState: nil
+		action:  [ self ownerMorph delete ]"#action "
+		label: 'close'"#label"
+		menu: nil. 	
+]
 
 { #category : #accessing }
 FExample1Renderer >> model [
@@ -18,30 +28,26 @@ FExample1Renderer >> model: anObject [
 	model := anObject
 ]
 
-{ #category : #accessing }
-FExample1Renderer >> order [
-	^ order
-]
-
-{ #category : #accessing }
-FExample1Renderer >> order: anObject [
-	order := anObject
+{ #category : #rendering }
+FExample1Renderer >> ownerMorph [
+	^ ownerMorph ifNil: [ 
+		ownerMorph := Morph new
+			extent: 840@300;
+			layoutPolicy: (FAbsoluteRelativeLayout new direction: #rightDown);
+			yourself ].
 ]
 
 { #category : #rendering }
-FExample1Renderer >> render [
-	| a b |
-	a := [ FLabeledText on: model label: 'a' selector: #a ].
-	order at: #a put: a.
-	b := [ FLabeledText on: model label: 'b' selector: #b ].
-	order at: #b put: b.
-	order at: #c put: a.
-	order at: #d put: b.
-]
-
-{ #category : #rendering }
-FExample1Renderer >> render: aModel order: anOrder [
-	model := aModel.
-	order := anOrder.
-	self render.
+FExample1Renderer >> render: aModel selector: aSelector [
+	| a b c d e f |
+	self model: aModel.
+	a := FLabeledText on: aModel label: 'a' selector: #a.
+	b := FLabeledText on: aModel label: 'b' selector: #c.
+	b extent: 250@60; hResizing: #spaceFill.
+	c := FLabeledText on: aModel label: 'c' selector: #a.
+	d := FLabeledText on: aModel label: 'd' selector: #c.
+	e := FLabeledText on: aModel label: 'e' selector: #b.
+	f := FLabeledText on: aModel label: 'f' selector: #b.
+	self ownerMorph addMorphBack: a; addMorphBack: b; addMorphBack: c; addMorphBack: d; addMorphBack: e; addMorphBack: f.
+	^ ownerMorph.
 ]

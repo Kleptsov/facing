@@ -107,7 +107,7 @@ FAbsoluteRelativeLayout >> layout: aMorph in: aBox [
 	box := aBox.
 	height := 0.
 	self initializeCarriage.
-	aMorph submorphsReverseDo: [ :m | self layoutSubmorph: m ]
+	aMorph submorphsDo: [ :m | self layoutSubmorph: m ]
 ]
 
 { #category : #layout }

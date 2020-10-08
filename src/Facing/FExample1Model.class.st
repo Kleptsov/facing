@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'a',
-		'b'
+		'b',
+		'c'
 	],
 	#category : #'Facing-Example'
 }
@@ -27,11 +28,43 @@ FExample1Model >> b [
 { #category : #accessing }
 FExample1Model >> b: anObject [
 	b := anObject.
-	b changed: #b.
+	self changed: #b.
+]
+
+{ #category : #accessing }
+FExample1Model >> c [
+	^ c ifNil: [ c := '' ]
+]
+
+{ #category : #accessing }
+FExample1Model >> c: aString [
+	c := aString.
+	self changed: #c
+]
+
+{ #category : #rendering }
+FExample1Model >> morphController [
+	^ FExample1Controller new
 ]
 
 { #category : #rendering }
 FExample1Model >> morphRenderer [
-	^ FExample1Renderer new 
+	^ FExample1Renderer new.
 	
+]
+
+{ #category : #rendering }
+FExample1Model >> morphView [
+	^ self morphController updateModel: self.
+	
+]
+
+{ #category : #rendering }
+FExample1Model >> morphViewInWindow [
+	| m w |
+	m := self morphView.
+	w := StandardWindow new.
+	w addMorph: m frame: LayoutFrame new.
+	w open.
+	^ m
 ]
