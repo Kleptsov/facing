@@ -23,7 +23,7 @@ FMorphRenderer >> owner [
 ^ owner ifNil: [ 
 		owner := Morph new
 			extent: 650@500;
-			color: (Color r: 0.95 g: 0.95 b: 0.85);
+			color: (Smalltalk ui theme baseColor);
 			layoutPolicy: (FAbsoluteRelativeLayout new direction: #rightDown);
 			yourself ].
 ]
