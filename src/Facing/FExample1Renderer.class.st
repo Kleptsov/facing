@@ -31,13 +31,13 @@ FExample1Renderer >> ownerMorph [
 FExample1Renderer >> render: aModel selector: aSelector [
 	| a b c d e f |
 	self model: aModel.
-	a := FLabeledText on: aModel label: 'a' selector: #a.
-	b := FLabeledText on: aModel label: 'b' selector: #c.
+	a := FText on: aModel label: 'a' selector: #a.
+	b := FText on: aModel label: 'b' selector: #c.
 	b extent: 250@60; hResizing: #spaceFill.
-	c := FLabeledText on: aModel label: 'c' selector: #a.
-	d := FLabeledText on: aModel label: 'd' selector: #c.
-	e := FLabeledText on: aModel label: 'e' selector: #b.
-	f := FLabeledText on: aModel label: 'f' selector: #b.
+	c := FText on: aModel label: 'c' selector: #a.
+	d := FText on: aModel label: 'd' selector: #c.
+	e := FText on: aModel label: 'e' selector: #b.
+	f := FText on: aModel label: 'f' selector: #b.
 	self ownerMorph addMorphBack: a; addMorphBack: b; addMorphBack: c; addMorphBack: d; addMorphBack: e; addMorphBack: f.
 	^ ownerMorph.
 ]
