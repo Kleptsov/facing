@@ -16,7 +16,7 @@ FModel >> morphRenderer [
 
 { #category : #rendering }
 FModel >> morphView [
-	^ self subclassResponsibility
+	^ self morphController listen: #yourself from: self.
 ]
 
 { #category : #rendering }

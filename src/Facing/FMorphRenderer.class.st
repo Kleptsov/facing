@@ -45,10 +45,30 @@ FMorphRenderer >> render [
 ]
 
 { #category : #rendering }
+FMorphRenderer >> render: aSelector [
+	| m |
+	m := (model perform: aSelector) morphController
+					listen: aSelector from: model.
+	self owner addMorphBack: m.
+	^ m.
+]
+
+{ #category : #rendering }
 FMorphRenderer >> render: aModel selector: aSelector [
 	self model: aModel.
 	self selector: aSelector.
 	^ self render.
+]
+
+{ #category : #rendering }
+FMorphRenderer >> render: aSelector with: aMorphBehavior [
+	| m c |
+	c := (model perform: aSelector) morphController.
+	m := c listen: aSelector from: model.
+	c morphBehavior: aMorphBehavior.
+	aMorphBehavior value: m.
+	self owner addMorphBack: m.
+	^ m.
 ]
 
 { #category : #accessing }

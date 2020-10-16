@@ -17,11 +17,6 @@ FTextModel >> morphRenderer [
 	^ FTextModelRenderer new
 ]
 
-{ #category : #rendering }
-FTextModel >> morphView [
-	^ self morphController listen: #yourself from: self.
-]
-
 { #category : #accessing }
 FTextModel >> val [
 	^ val ifNil: [ val := '' ]

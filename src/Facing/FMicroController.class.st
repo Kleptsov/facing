@@ -38,18 +38,6 @@ FMicroController >> update: aSelector with: aModel [
 ]
 
 { #category : #updating }
-FMicroController >> updateMorph [
-	| morphRenderer new |
-	morphRenderer := model morphRenderer.
-	new := morphRenderer render: model selector: selector.
-	^ canvas
-		ifNotNil: [ canvas owner
-						ifNotNil: [canvas owner replaceSubmorph: canvas by: new. ]
-						ifNil: [ canvas := new ] ]
-		ifNil: [ canvas := new ].
-]
-
-{ #category : #updating }
 FMicroController >> updateView [
 	^ self subclassResponsibility
 ]
