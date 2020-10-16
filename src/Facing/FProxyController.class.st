@@ -5,8 +5,8 @@ Class {
 }
 
 { #category : #updating }
-FProxyController >> updateModel: aModel [
-	canvas ifNil: [ self updateMorph: aModel ].
-	aModel changed: selector.
+FProxyController >> updateView [
+	canvas ifNil: [ self updateMorph ].
+	model changed: selector.
 	^ canvas
 ]

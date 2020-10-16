@@ -3,10 +3,20 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'canvas',
-		'selector'
+		'selector',
+		'submodel',
+		'model'
 	],
 	#category : #'Facing-Core'
 }
+
+{ #category : #updating }
+FMicroController >> listen: aSelector from: aModel [
+	selector := aSelector.
+	aModel addDependent: self.
+	model := aModel.
+	^ self update: aSelector with: model.
+]
 
 { #category : #accessing }
 FMicroController >> selector [
@@ -21,11 +31,25 @@ FMicroController >> selector: anObject [
 { #category : #updating }
 FMicroController >> update: aSelector with: aModel [
 
-	selector == aSelector
-		ifTrue: [ self updateModel: aModel ]
+	^ selector == aSelector
+			ifTrue: [ model := aModel.
+						self updateView ]
+			ifFalse: [ nil ]
 ]
 
 { #category : #updating }
-FMicroController >> updateModel: aModel [
+FMicroController >> updateMorph [
+	| morphRenderer new |
+	morphRenderer := model morphRenderer.
+	new := morphRenderer render: model selector: selector.
+	^ canvas
+		ifNotNil: [ canvas owner
+						ifNotNil: [canvas owner replaceSubmorph: canvas by: new. ]
+						ifNil: [ canvas := new ] ]
+		ifNil: [ canvas := new ].
+]
+
+{ #category : #updating }
+FMicroController >> updateView [
 	^ self subclassResponsibility
 ]

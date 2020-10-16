@@ -55,7 +55,7 @@ FExample1Model >> morphRenderer [
 
 { #category : #rendering }
 FExample1Model >> morphView [
-	^ self morphController updateModel: self.
+	^ self morphController listen: #yourself from: self.
 	
 ]
 

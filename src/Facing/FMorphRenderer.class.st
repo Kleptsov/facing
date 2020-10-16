@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'owner',
-		'model'
+		'model',
+		'selector'
 	],
 	#category : #'Facing-Core'
 }
@@ -36,4 +37,26 @@ FMorphRenderer >> owner: anObject [
 			color: Color gray;
 			layoutPolicy: (FAbsoluteRelativeLayout new direction: #rightDown);
 			yourself ].
+]
+
+{ #category : #rendering }
+FMorphRenderer >> render [
+	^ self subclassResponsibility 
+]
+
+{ #category : #rendering }
+FMorphRenderer >> render: aModel selector: aSelector [
+	self model: aModel.
+	self selector: aSelector.
+	^ self render.
+]
+
+{ #category : #accessing }
+FMorphRenderer >> selector [
+	^ selector
+]
+
+{ #category : #accessing }
+FMorphRenderer >> selector: anObject [
+	selector := anObject
 ]
