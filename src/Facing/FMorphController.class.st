@@ -26,8 +26,9 @@ FMorphController >> updateMorph [
 	new setProperty: #fController toValue: self. "self no gc"
 	self morphBehavior value: new.
 	canvas
-		ifNotNil: [ canvas owner
-						ifNotNil: [canvas owner replaceSubmorph: canvas by: new ] ].
+		ifNotNil: [ canvas setProperty: #fController toValue: nil.
+						canvas owner
+							ifNotNil: [canvas owner replaceSubmorph: canvas by: new ] ].
 	^ canvas := new.
 ]
 
