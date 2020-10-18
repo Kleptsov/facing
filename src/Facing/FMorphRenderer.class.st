@@ -34,7 +34,7 @@ FMorphRenderer >> owner: anObject [
 	^ owner ifNil: [ 
 		owner := Morph new
 			extent: 840@300;
-			color: Color gray;
+			color: Color transparent;
 			layoutPolicy: (FAbsoluteRelativeLayout new direction: #rightDown);
 			yourself ].
 ]
@@ -66,6 +66,18 @@ FMorphRenderer >> render: aSelector with: aMorphBehavior [
 	c := (model perform: aSelector) morphController.
 	m := c listen: aSelector from: model.
 	c morphBehavior: aMorphBehavior.
+	aMorphBehavior value: m.
+	self owner addMorphBack: m.
+	^ m.
+]
+
+{ #category : #rendering }
+FMorphRenderer >> render: aSelector with: aMorphBehavior finalize: aMorphFinalyze [
+	| m c |
+	c := (model perform: aSelector) morphController.
+	m := c listen: aSelector from: model.
+	c morphBehavior: aMorphBehavior.
+	c morphFinalize: aMorphFinalyze.
 	aMorphBehavior value: m.
 	self owner addMorphBack: m.
 	^ m.

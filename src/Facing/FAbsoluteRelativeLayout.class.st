@@ -125,6 +125,8 @@ FAbsoluteRelativeLayout >> layoutSubmorph: aMorph [
 { #category : #layout }
 FAbsoluteRelativeLayout >> leftDown: aSubmorph [
 	"укладка справа потом вниз"
+	
+	(self leftDownCr: aSubmorph) ifTrue: [ ^ self ].
 
 	"уложить морф"
 
@@ -141,6 +143,14 @@ FAbsoluteRelativeLayout >> leftDown: aSubmorph [
 	"смещение новой строки"
 	self height < aSubmorph height
 		ifTrue: [ height := aSubmorph height ]
+]
+
+{ #category : #layout }
+FAbsoluteRelativeLayout >> leftDownCr: aSubmorph [
+		"Переход на новую строку"
+	(aSubmorph hasProperty: #cr) ifFalse: [ ^ false ].
+	carriage := box right @ (carriage y + height).
+	^ true.
 ]
 
 { #category : #layout }
@@ -174,6 +184,8 @@ FAbsoluteRelativeLayout >> leftDownLayout: aSubmorph [
 { #category : #layout }
 FAbsoluteRelativeLayout >> leftUp: aSubmorph [
 	"укладка справа потом вниз"
+	
+	(self leftUpCr: aSubmorph) ifTrue: [ ^self ].
 
 	"уложить морф"
 
@@ -190,6 +202,14 @@ FAbsoluteRelativeLayout >> leftUp: aSubmorph [
 	"смещение новой строки"
 	self height < aSubmorph height
 		ifTrue: [ height := aSubmorph height ]
+]
+
+{ #category : #layout }
+FAbsoluteRelativeLayout >> leftUpCr: aSubmorph [
+	"Переход на новую строку"
+	(aSubmorph hasProperty: #cr) ifFalse: [ ^ false ].
+	carriage := box right @ (carriage y - height).
+	^ true.
 ]
 
 { #category : #layout }
@@ -223,6 +243,10 @@ FAbsoluteRelativeLayout >> leftUpLayout: aSubmorph [
 { #category : #layout }
 FAbsoluteRelativeLayout >> rightDown: aSubmorph [
 	"укладка справа потом вниз"
+	
+	"перейти на новую строку если свойство cr морфа установлено"
+	
+	(self rightDownCr: aSubmorph) ifTrue: [ ^ self ].
 
 	"уложить морф"
 
@@ -242,6 +266,14 @@ FAbsoluteRelativeLayout >> rightDown: aSubmorph [
 ]
 
 { #category : #layout }
+FAbsoluteRelativeLayout >> rightDownCr: aSubmorph [
+	"Переход на новую строку"
+	(aSubmorph hasProperty: #cr) ifFalse: [ ^ false ].
+	carriage := box left @ (carriage y + height).
+	^ true.
+]
+
+{ #category : #layout }
 FAbsoluteRelativeLayout >> rightDownLayout: aSubmorph [
 	| ext rExt |
 	"укладка обычная"
@@ -253,9 +285,9 @@ FAbsoluteRelativeLayout >> rightDownLayout: aSubmorph [
 	rExt := aSubmorph valueOfProperty: #relativeExtent ifAbsent: [ nil ].
 	rExt
 		ifNotNil: [ (rExt x isNil or: [ rExt x = 0 ])
-				ifFalse: [ ext := (box extent x * rExt x) @ ext y ].
+				ifFalse: [ ext := ((box extent x * rExt x) asInteger) @ (ext y) asInteger ].
 			(rExt y isNil or: [ rExt y = 0 ])
-				ifFalse: [ ext := ext x @ (box extent y * rExt y) ].
+				ifFalse: [ ext := ((ext x) asInteger) @ (box extent y * rExt y) asInteger ].
 			aSubmorph extent: ext rounded ].
 
 	"укладка с заполнением"
@@ -269,6 +301,8 @@ FAbsoluteRelativeLayout >> rightDownLayout: aSubmorph [
 { #category : #layout }
 FAbsoluteRelativeLayout >> rightUp: aSubmorph [
 	"укладка справа потом вверх"
+	
+	(self rightUpCr: aSubmorph) ifTrue: [ ^ self ].
 
 	"уложить морф"
 
@@ -285,6 +319,14 @@ FAbsoluteRelativeLayout >> rightUp: aSubmorph [
 	"смещение новой строки"
 	self height < aSubmorph height
 		ifTrue: [ height := aSubmorph height ]
+]
+
+{ #category : #layout }
+FAbsoluteRelativeLayout >> rightUpCr: aSubmorph [
+	"Переход на новую строку"
+	(aSubmorph hasProperty: #cr) ifFalse: [ ^ false ].
+	carriage := box left @ (carriage y - height).
+	^ true.
 ]
 
 { #category : #layout }

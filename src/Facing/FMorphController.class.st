@@ -2,7 +2,8 @@ Class {
 	#name : #FMorphController,
 	#superclass : #FMicroController,
 	#instVars : [
-		'morphBehavior'
+		'morphBehavior',
+		'morphFinalize'
 	],
 	#category : #'Facing-Core'
 }
@@ -17,6 +18,16 @@ FMorphController >> morphBehavior: anObject [
 	morphBehavior := anObject
 ]
 
+{ #category : #accessing }
+FMorphController >> morphFinalize [
+	^ morphFinalize ifNil: [ morphFinalize := [ :m| ] ]
+]
+
+{ #category : #accessing }
+FMorphController >> morphFinalize: anObject [
+	morphFinalize := anObject
+]
+
 { #category : #updating }
 FMorphController >> updateMorph [
 	| morphRenderer new sub |
@@ -25,6 +36,7 @@ FMorphController >> updateMorph [
 	new := morphRenderer render: sub selector: selector.
 	new setProperty: #fController toValue: self. "self no gc"
 	self morphBehavior value: new.
+	self morphFinalize value: canvas.
 	canvas
 		ifNotNil: [ canvas setProperty: #fController toValue: nil.
 						canvas owner
