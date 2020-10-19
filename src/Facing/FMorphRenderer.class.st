@@ -10,6 +10,16 @@ Class {
 }
 
 { #category : #accessing }
+FMorphRenderer >> model [
+	^ model
+]
+
+{ #category : #accessing }
+FMorphRenderer >> model: anObject [
+	model := anObject
+]
+
+{ #category : #accessing }
 FMorphRenderer >> owner [
 	^ owner ifNil: [ 
 		owner := Morph new

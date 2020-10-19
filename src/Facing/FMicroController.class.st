@@ -19,6 +19,15 @@ FMicroController >> listen: aSelector from: aModel [
 ]
 
 { #category : #updating }
+FMicroController >> update: aSelector with: aModel [
+
+	^ selector == aSelector
+			ifTrue: [ model := aModel.
+						self updateView ]
+			ifFalse: [ nil ]
+]
+
+{ #category : #updating }
 FMicroController >> updateView [
 	^ self subclassResponsibility
 ]

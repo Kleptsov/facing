@@ -3,7 +3,8 @@ Class {
 	#superclass : #MorphTreeModel,
 	#instVars : [
 		'columns',
-		'treeMorphBlock'
+		'treeMorphBlock',
+		'selectAction'
 	],
 	#category : #'Facing-Model'
 }
@@ -38,6 +39,13 @@ FMorphTreeModel >> columns: anObject [
 	columns := anObject
 ]
 
+{ #category : #initialization }
+FMorphTreeModel >> initializeSelection: anAnnouncer [
+	anAnnouncer
+		when: MorphTreeSelectionChanged
+		do: [ :a | (a selection lastSelectedNode) ifNotNil: [ :n| self selectAction cull: n item ] ]
+]
+
 { #category : #rendering }
 FMorphTreeModel >> morphController [
 	^ FDirectController new.
@@ -65,6 +73,16 @@ FMorphTreeModel >> morphViewInWindow [
 	^ m
 ]
 
+{ #category : #accessing }
+FMorphTreeModel >> selectAction [
+	^ selectAction ifNil: [ selectAction := [ :v| ] ]
+]
+
+{ #category : #accessing }
+FMorphTreeModel >> selectAction: aBlock [
+	selectAction := aBlock.
+]
+
 { #category : #'column handling' }
 FMorphTreeModel >> treeMorph [
 	| tm |
@@ -84,6 +102,7 @@ FMorphTreeModel >> treeMorph [
 			isCheckList: self isCheckList.
 	self treeMorphBlock value: tm.
 	tm buildContents.
+	self initializeSelection: tm announcer.
 	^ tm
 ]
 
