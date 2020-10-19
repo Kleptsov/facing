@@ -5,12 +5,12 @@ Class {
 		'columns',
 		'treeMorphBlock'
 	],
-	#category : #'Facing-Morphs'
+	#category : #'Facing-Model'
 }
 
 { #category : #'column handling' }
 FMorphTreeModel >> columnLabel: aLabel selector: aSelector [
-	self columnLabel: aLabel selector: aSelector morph: [ :val|
+	^ self columnLabel: aLabel selector: aSelector morph: [ :val|
 		val asString asMorph ]
 ]
 
@@ -20,9 +20,12 @@ FMorphTreeModel >> columnLabel: aLabel selector: aSelector morph: aBlock [
 	c := MorphTreeColumn new.
 	c 	headerButtonLabel: aLabel font: nil;
 		rowMorphGetSelector: [ :n|
-			val := n item perform: aSelector.
+			val := (aSelector class = BlockClosure)
+				ifTrue: [ aSelector value: n item ]
+				ifFalse: [ n item perform: aSelector ].
 			aBlock cull: val cull: c ].
 	self columns add: c.
+	^ c.
 ]
 
 { #category : #accessing }

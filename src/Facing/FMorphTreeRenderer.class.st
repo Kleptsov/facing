@@ -1,7 +1,7 @@
 Class {
 	#name : #FMorphTreeRenderer,
 	#superclass : #FMorphRenderer,
-	#category : #'Facing-Morphs'
+	#category : #'Facing-Model'
 }
 
 { #category : #rendering }

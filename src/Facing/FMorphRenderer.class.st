@@ -9,6 +9,17 @@ Class {
 	#category : #'Facing-Core'
 }
 
+{ #category : #accessing }
+FMorphRenderer >> owner [
+	^ owner ifNil: [ 
+		owner := Morph new
+			extent: 100@40;
+			color: Color transparent;
+			layoutPolicy: (FAbsoluteRelativeLayout new direction: #rightDown);
+			hResizing: #spaceFill;
+			yourself ]
+]
+
 { #category : #rendering }
 FMorphRenderer >> render [
 	^ self subclassResponsibility 
