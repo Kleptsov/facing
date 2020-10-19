@@ -35,6 +35,33 @@ FMorphTreeModel >> columns: anObject [
 	columns := anObject
 ]
 
+{ #category : #rendering }
+FMorphTreeModel >> morphController [
+	^ FDirectController new.
+]
+
+{ #category : #rendering }
+FMorphTreeModel >> morphRenderer [
+	^ FMorphTreeRenderer new.
+]
+
+{ #category : #rendering }
+FMorphTreeModel >> morphView [
+	^ self morphController
+			listen: #yourself from: self.
+]
+
+{ #category : #rendering }
+FMorphTreeModel >> morphViewInWindow [
+	| m w |
+	m := self morphView.
+	w := StandardWindow new.
+	w title: 'Tree Morph'.
+	w addMorph: m frame: LayoutFrame new.
+	w open.
+	^ m
+]
+
 { #category : #'column handling' }
 FMorphTreeModel >> treeMorph [
 	| tm |
