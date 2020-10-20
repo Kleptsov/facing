@@ -150,6 +150,7 @@ FAbsoluteRelativeLayout >> leftDownCr: aSubmorph [
 		"Переход на новую строку"
 	(aSubmorph hasProperty: #cr) ifFalse: [ ^ false ].
 	carriage := box right @ (carriage y + height).
+	height := 0.
 	^ true.
 ]
 
@@ -209,6 +210,7 @@ FAbsoluteRelativeLayout >> leftUpCr: aSubmorph [
 	"Переход на новую строку"
 	(aSubmorph hasProperty: #cr) ifFalse: [ ^ false ].
 	carriage := box right @ (carriage y - height).
+	height := 0.
 	^ true.
 ]
 
@@ -270,6 +272,7 @@ FAbsoluteRelativeLayout >> rightDownCr: aSubmorph [
 	"Переход на новую строку"
 	(aSubmorph hasProperty: #cr) ifFalse: [ ^ false ].
 	carriage := box left @ (carriage y + height).
+	height := 0.
 	^ true.
 ]
 
@@ -326,6 +329,7 @@ FAbsoluteRelativeLayout >> rightUpCr: aSubmorph [
 	"Переход на новую строку"
 	(aSubmorph hasProperty: #cr) ifFalse: [ ^ false ].
 	carriage := box left @ (carriage y - height).
+	height := 0.
 	^ true.
 ]
 
