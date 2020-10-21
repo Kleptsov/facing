@@ -5,28 +5,32 @@ Class {
 }
 
 { #category : #creating }
-FButton class >> label: aLabel action: anAction [
-	^ self
-			newButtonFor: nil
-			action: anAction
-			label: aLabel
-			help: aLabel asString
+FButton class >> label: aLabelOrMorph action: anAction [
+	^ self label: aLabelOrMorph action: anAction help: aLabelOrMorph asString.
 ]
 
 { #category : #creating }
-FButton class >> label: aLabel action: anAction help: aHelpString [
+FButton class >> label: aLabelOrMorph action: anAction help: aHelpString [
 	^ self
-			newButtonFor: nil
-			action: anAction
-			label: aLabel
+			newButtonFor: anAction
+			action: #value
+			label: aLabelOrMorph
 			help: aHelpString
 ]
 
 { #category : #creating }
-FButton class >> model: aModel label: aLabel action: anAction [
-	^ self
+FButton class >> model: aModel label: aLabelOrMorph action: anAction [
+	^ self model: aModel
+			label: aLabelOrMorph
+			action: anAction
+			help: aLabelOrMorph asString.
+]
+
+{ #category : #creating }
+FButton class >> model: aModel label: aLabel action: anAction help: aHelpString [
+	^ (self
 			newButtonFor: aModel
 			action: anAction
 			label: aLabel
-			help: aLabel asString
+			help: aHelpString)
 ]
