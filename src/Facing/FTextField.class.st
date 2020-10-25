@@ -21,6 +21,6 @@ FTextField class >> on: aModel text: aTextSelector accept: anAcceptSelector acce
 	txtMorph on: aModel text: aTextSelector accept: anAcceptSelector readSelection: nil menu: nil.
 	txtMorph autoAccept: true.
 	txtMorph acceptAction: anAcceptAction.
-	txtMorph hideVScrollBarIndefinitely: true.
+	txtMorph hideScrollBarsIndefinitely.
 	^ txtMorph yourself.
 ]
