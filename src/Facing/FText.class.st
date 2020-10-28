@@ -65,7 +65,7 @@ FText >> accept: anObject [
 
 { #category : #accessing }
 FText >> acceptAction [
-	^ acceptAction
+	^ acceptAction ifNil: [ acceptAction := [  ] ]
 ]
 
 { #category : #accessing }
@@ -76,7 +76,7 @@ FText >> acceptAction: anObject [
 { #category : #initialization }
 FText >> initializeLabel [
 	labelMorph := StringMorph contents: self label.
-	labelMorph extent: 100@17.
+	"labelMorph extent: 100@17."
 	labelMorph hResizing: #spaceFill.
 ]
 
@@ -96,7 +96,7 @@ FText >> initializeMorph [
 FText >> initializeTextField [
 	textField := FTextField on: textModel text: text accept: accept acceptAction: acceptAction.
 	"textField setProperty: #relativeExtent toValue: 1.0@0.5. "
-	textField extent: 10@17.
+	textField extent: 10@30.
 	textField vResizing: #spaceFill.
 	textField hResizing: #spaceFill. 
 ]
