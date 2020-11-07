@@ -36,12 +36,15 @@ FMorphRenderer >> render [
 ]
 
 { #category : #rendering }
-FMorphRenderer >> render: aSelector [
-	| m |
-	m := (model perform: aSelector) morphController
-					listen: aSelector from: model.
-	self owner addMorphBack: m.
-	^ m.
+FMorphRenderer >> render: aSelectorOrMorph [
+	| morph |
+	morph := aSelectorOrMorph isMorph
+		ifTrue: [ aSelectorOrMorph ]
+		ifFalse: [ (model perform: aSelectorOrMorph) morphController
+				listen: aSelectorOrMorph
+				from: model ].
+	self owner addMorphBack: morph.
+	^ morph
 ]
 
 { #category : #rendering }
@@ -52,14 +55,16 @@ FMorphRenderer >> render: aModel selector: aSelector [
 ]
 
 { #category : #rendering }
-FMorphRenderer >> render: aSelector with: aMorphBehavior [
-	| m c |
-	c := (model perform: aSelector) morphController.
-	m := c listen: aSelector from: model.
-	c morphBehavior: aMorphBehavior.
-	aMorphBehavior value: m.
-	self owner addMorphBack: m.
-	^ m.
+FMorphRenderer >> render: aSelectorOrMorph with: aMorphBehavior [
+	| morph controller |
+	morph := aSelectorOrMorph isMorph
+		ifTrue: [ aSelectorOrMorph ]
+		ifFalse: [ controller := (model perform: aSelectorOrMorph) morphController.
+			morph := controller listen: aSelectorOrMorph from: model.
+			controller morphBehavior: aMorphBehavior.
+			aMorphBehavior value: morph. ].
+	self owner addMorphBack: morph.
+	^ morph.
 ]
 
 { #category : #rendering }

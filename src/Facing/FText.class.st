@@ -86,7 +86,7 @@ FText >> initializeMorph [
 	self initializeTextField.
 	self
 		layoutPolicy: (AAbsoluteRelativeLayout new direction: #rightDown);
-		extent: 300@60;
+		extent: 300@100;
 		addMorph: labelMorph;
 		addMorph: textField;
 		color: (self color alpha: 0.0).
@@ -94,11 +94,12 @@ FText >> initializeMorph [
 
 { #category : #initialization }
 FText >> initializeTextField [
-	textField := FTextField on: textModel text: text accept: accept acceptAction: acceptAction.
-	"textField setProperty: #relativeExtent toValue: 1.0@0.5. "
-	textField extent: 10@30.
+	textField := FRubTextFieldArea new.
+	textField
+		model: textModel; selector: text.
+	textField extent: 10@52; beWrapped.
 	textField vResizing: #spaceFill.
-	textField hResizing: #spaceFill. 
+	textField hResizing: #spaceFill.
 ]
 
 { #category : #accessing }
