@@ -8,6 +8,18 @@ Class {
 	#category : #'Facing-Morphs'
 }
 
+{ #category : #'as yet unclassified' }
+FRubTextFieldArea >> defaultMargins [
+
+	^ Margin left: 1 right: 1 top: 1 bottom: 1
+]
+
+{ #category : #initialize }
+FRubTextFieldArea >> initialize [
+	super initialize.
+	
+]
+
 { #category : #accessing }
 FRubTextFieldArea >> isChanging [
 	^ isChanging ifNil: [ isChanging := false ].
@@ -47,5 +59,13 @@ FRubTextFieldArea >> update: aSelector [
 		ifFalse: [ ^ self ].
 	self isChanging
 		ifTrue: [ ^ self ].
+	self updateTextWith: (model perform: aSelector asSymbol) asString.
+]
+
+{ #category : #accessing }
+FRubTextFieldArea >> update: aSelector with: anObject [
+	anObject = #forcibly ifFalse: [ 
+		aSelector = selector ifFalse: [ ^ self ].
+		self isChanging ifTrue: [ ^ self ] ].
 	self updateTextWith: (model perform: aSelector asSymbol) asString.
 ]
