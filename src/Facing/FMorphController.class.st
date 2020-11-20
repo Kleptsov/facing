@@ -39,6 +39,7 @@ FMorphController >> updateMorph [
 	self morphFinalize value: canvas.
 	canvas
 		ifNotNil: [ canvas setProperty: #fController toValue: nil.
+						canvas announcer ifNotNil: [:a| a subscriptions reset].
 						canvas owner
 							ifNotNil: [canvas owner replaceSubmorph: canvas by: new ] ].
 	"new owner ifNotNil: [ :m| m computeFullBounds ]."

@@ -59,7 +59,7 @@ FRubTextFieldArea >> update: aSelector [
 		ifFalse: [ ^ self ].
 	self isChanging
 		ifTrue: [ ^ self ].
-	self updateTextWith: (model perform: aSelector asSymbol) asString.
+	self "updateTextWith"privateText: (model perform: aSelector asSymbol) asString.
 ]
 
 { #category : #accessing }
@@ -67,5 +67,5 @@ FRubTextFieldArea >> update: aSelector with: anObject [
 	anObject = #forcibly ifFalse: [ 
 		aSelector = selector ifFalse: [ ^ self ].
 		self isChanging ifTrue: [ ^ self ] ].
-	self updateTextWith: (model perform: aSelector asSymbol) asString.
+	self "updateTextWith"privateText: (model perform: aSelector asSymbol) asString.
 ]
