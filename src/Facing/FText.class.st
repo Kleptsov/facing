@@ -94,12 +94,18 @@ FText >> initializeMorph [
 
 { #category : #initialization }
 FText >> initializeTextField [
-	textField := FRubTextFieldArea new.
+	textField := PluggableTextFieldMorph new.
+	textField on: textModel text: text accept: (text, ':') readSelection: nil menu: nil.
+	textField autoAccept: true;
+		hideScrollBarsIndefinitely;
+		vResizing: #spaceFill;
+		hResizing: #spaceFill.
+	"textField := FRubTextFieldArea new.
 	textField
 		model: textModel; selector: text.
 	textField extent: 10@52; beWrapped.
 	textField vResizing: #spaceFill.
-	textField hResizing: #spaceFill.
+	textField hResizing: #spaceFill."
 ]
 
 { #category : #accessing }
