@@ -108,6 +108,11 @@ FText >> initializeTextField [
 	textField hResizing: #spaceFill."
 ]
 
+{ #category : #'event handling' }
+FText >> keyboardFocusChange: aBoolean [
+	self textField keyboardFocusChange: aBoolean
+]
+
 { #category : #accessing }
 FText >> label [
 	^ label
