@@ -54,6 +54,20 @@ FRubTextFieldArea >> selector: anObject [
 ]
 
 { #category : #accessing }
+FRubTextFieldArea >> source: aModel selector: aSelector [
+	super model: aModel.
+	selector := aSelector.
+	model ifNil: [ ^ self ].
+	model addEvent: #updateText: receiver: self.
+	self addEvent: aSelector asSymbol receiver: model.
+	self announcer when: RubTextChanged do: [ :a|
+		self isChanging: true.		
+		self sEvent: aSelector asSymbol arg: editor text string.
+		self isChanging: false. ].
+	selector ifNotNil: [model sEvent: #updateText arg: (model perform: selector)].
+]
+
+{ #category : #accessing }
 FRubTextFieldArea >> update: aSelector [
 	aSelector = selector
 		ifFalse: [ ^ self ].
@@ -67,5 +81,14 @@ FRubTextFieldArea >> update: aSelector with: anObject [
 	anObject = #forcibly ifFalse: [ 
 		aSelector = selector ifFalse: [ ^ self ].
 		self isChanging ifTrue: [ ^ self ] ].
-	self "updateTextWith"privateText: (model perform: aSelector asSymbol) asString.
+	self updateTextWith:"privateText:" (model perform: aSelector asSymbol) asString.
+]
+
+{ #category : #accessing }
+FRubTextFieldArea >> updateText: aSelector [
+	aSelector = selector
+		ifFalse: [ ^ self ].
+	self isChanging
+		ifTrue: [ ^ self ].
+	self updateTextWith:"privateText" (model perform: aSelector asSymbol) asString.
 ]
