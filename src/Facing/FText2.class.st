@@ -1,5 +1,5 @@
 Class {
-	#name : #FText,
+	#name : #FText2,
 	#superclass : #Morph,
 	#instVars : [
 		'label',
@@ -15,7 +15,7 @@ Class {
 }
 
 { #category : #creating }
-FText class >> on: model label: aLabel selector: aSelector [
+FText2 class >> on: model label: aLabel selector: aSelector [
 
 ^ self new
 	textModel: model;
@@ -27,7 +27,7 @@ FText class >> on: model label: aLabel selector: aSelector [
 ]
 
 { #category : #creating }
-FText class >> on: model label: aLabel text: aText accept: anAccept acceptAction: anAction [
+FText2 class >> on: model label: aLabel text: aText accept: anAccept acceptAction: anAction [
 
 ^ self new
 	textModel: model;
@@ -52,35 +52,21 @@ m color: (m color alpha: 0.0).
 ^ m"
 ]
 
-{ #category : #accessing }
-FText >> accept [
-	^ accept
-]
-
-{ #category : #accessing }
-FText >> accept: anObject [
-	accept := anObject
-]
-
-{ #category : #accessing }
-FText >> acceptAction [
-	^ acceptAction ifNil: [ acceptAction := [  ] ]
-]
-
-{ #category : #accessing }
-FText >> acceptAction: anObject [
-	acceptAction := anObject
+{ #category : #initialization }
+FText2 >> initialize [
+	super initialize.
+	self initializeMorph.
 ]
 
 { #category : #initialization }
-FText >> initializeLabel [
+FText2 >> initializeLabel [
 	labelMorph := StringMorph contents: self label.
 	"labelMorph extent: 100@17."
 	labelMorph hResizing: #spaceFill.
 ]
 
 { #category : #initialization }
-FText >> initializeMorph [
+FText2 >> initializeMorph [
 	self initializeLabel.
 	self initializeTextField.
 	self
@@ -92,77 +78,70 @@ FText >> initializeMorph [
 ]
 
 { #category : #initialization }
-FText >> initializeTextField [
-	"textField := PluggableTextFieldMorph new.
-	textField on: textModel text: text accept: (text, ':') readSelection: nil menu: nil.
-	textField autoAccept: true;
-		hideScrollBarsIndefinitely;
+FText2 >> initializeTextField [
+	textField := FRubTextFieldArea2 new.
+	textField extent: 10@52;
+		beWrapped;
 		vResizing: #spaceFill;
-		hResizing: #spaceFill."
-	textField := FRubTextFieldArea new.
-	textField
-		model: textModel; selector: text.
-	textField extent: 10@52; beWrapped.
-	textField vResizing: #spaceFill.
-	textField hResizing: #spaceFill.
+		hResizing: #spaceFill.
 ]
 
 { #category : #accessing }
-FText >> label [
+FText2 >> label [
 	^ label
 ]
 
 { #category : #accessing }
-FText >> label: anObject [
+FText2 >> label: anObject [
 	label := anObject
 ]
 
 { #category : #accessing }
-FText >> labelMorph [
+FText2 >> labelMorph [
 	^ labelMorph
 ]
 
 { #category : #accessing }
-FText >> labelMorph: anObject [
+FText2 >> labelMorph: anObject [
 	labelMorph := anObject
 ]
 
 { #category : #accessing }
-FText >> morph [
+FText2 >> morph [
 	^ morph
 ]
 
 { #category : #accessing }
-FText >> morph: anObject [
+FText2 >> morph: anObject [
 	morph := anObject
 ]
 
 { #category : #accessing }
-FText >> text [
-	^ text
+FText2 >> text [
+	text
 ]
 
 { #category : #accessing }
-FText >> text: anObject [
+FText2 >> text: anObject [
 	text := anObject
 ]
 
 { #category : #accessing }
-FText >> textField [
+FText2 >> textField [
 	^ textField
 ]
 
 { #category : #accessing }
-FText >> textField: anObject [
+FText2 >> textField: anObject [
 	textField := anObject
 ]
 
 { #category : #accessing }
-FText >> textModel [
+FText2 >> textModel [
 	^ textModel
 ]
 
 { #category : #accessing }
-FText >> textModel: anObject [
+FText2 >> textModel: anObject [
 	textModel := anObject
 ]
