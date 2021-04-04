@@ -3,7 +3,8 @@ Class {
 	#superclass : #RubEditingArea,
 	#instVars : [
 		'selector',
-		'isChanging'
+		'isChanging',
+		'time'
 	],
 	#category : #'Facing-Morphs'
 }
@@ -18,7 +19,8 @@ FRubTextFieldArea2 >> defaultMargins [
 FRubTextFieldArea2 >> initialize [
 	super initialize.
 	self announcer when: RubTextChanged do: [ :a|
-		self isChanging ifFalse: [.		
+		self isChanging ifFalse: [.
+			time := Time now second asNumber.	
 			self sEvent: #updateText arg: editor text string ] ].
 	
 ]
@@ -59,9 +61,18 @@ FRubTextFieldArea2 >> source: aModel selector: aSelector [
 ]
 
 { #category : #accessing }
+FRubTextFieldArea2 >> time [
+	^ time ifNil: [ time := 0 ].
+]
+
+{ #category : #accessing }
 FRubTextFieldArea2 >> updateText: aText [
+	| timeNow |
+	timeNow := Time now second.
 	(aText asString = editor text string)
 		ifTrue: [ ^ self ].
+	aText asString = '' ifTrue: [ time := timeNow - 10 ].
+	(timeNow - self time) > 5 ifFalse: [ ^ self ].
 	self isChanging: true.
 	self updateTextWith:"privateText" aText.
 	self isChanging: false.
