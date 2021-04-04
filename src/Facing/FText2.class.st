@@ -55,7 +55,7 @@ m color: (m color alpha: 0.0).
 { #category : #initialization }
 FText2 >> initialize [
 	super initialize.
-	self initializeMorph.
+	self morph.
 ]
 
 { #category : #initialization }
@@ -71,7 +71,7 @@ FText2 >> initializeMorph [
 	self initializeTextField.
 	self
 		layoutPolicy: (AAbsoluteRelativeLayout new direction: #rightDown);
-		extent: 300@100;
+		extent: 300@40;
 		addMorph: labelMorph;
 		addMorph: textField;
 		color: (self color alpha: 0.0).
@@ -88,17 +88,18 @@ FText2 >> initializeTextField [
 
 { #category : #accessing }
 FText2 >> label [
-	^ label
+	^ (label ifNil: [ label := '' ]) translated
 ]
 
 { #category : #accessing }
 FText2 >> label: anObject [
-	label := anObject
+	label := anObject.
+	self labelMorph contents: self label.
 ]
 
 { #category : #accessing }
 FText2 >> labelMorph [
-	^ labelMorph
+	^ labelMorph ifNil: [ self initializeLabel. labelMorph ]
 ]
 
 { #category : #accessing }
@@ -108,7 +109,7 @@ FText2 >> labelMorph: anObject [
 
 { #category : #accessing }
 FText2 >> morph [
-	^ morph
+	^ morph ifNil: [ self initializeMorph. morph ]
 ]
 
 { #category : #accessing }
@@ -128,7 +129,7 @@ FText2 >> text: anObject [
 
 { #category : #accessing }
 FText2 >> textField [
-	^ textField
+	^ textField ifNil: [ self initializeTextField ]
 ]
 
 { #category : #accessing }

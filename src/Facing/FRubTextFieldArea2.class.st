@@ -18,9 +18,8 @@ FRubTextFieldArea2 >> defaultMargins [
 FRubTextFieldArea2 >> initialize [
 	super initialize.
 	self announcer when: RubTextChanged do: [ :a|
-		self isChanging: true.		
-		self sEvent: #textChanged arg: editor text string.
-		self isChanging: false. ].
+		self isChanging ifFalse: [.		
+			self sEvent: #updateText arg: editor text string ] ].
 	
 ]
 
@@ -61,7 +60,9 @@ FRubTextFieldArea2 >> source: aModel selector: aSelector [
 
 { #category : #accessing }
 FRubTextFieldArea2 >> updateText: aText [
-	self isChanging
+	(aText asString = editor text string)
 		ifTrue: [ ^ self ].
+	self isChanging: true.
 	self updateTextWith:"privateText" aText.
+	self isChanging: false.
 ]
