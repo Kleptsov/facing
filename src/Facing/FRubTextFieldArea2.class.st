@@ -67,13 +67,14 @@ FRubTextFieldArea2 >> time [
 
 { #category : #accessing }
 FRubTextFieldArea2 >> updateText: aText [
-	| timeNow |
+	| timeNow txt|
+	txt := aText asString.
 	timeNow := Time now second.
-	(aText asString = editor text string)
+	(txt = editor text)
 		ifTrue: [ ^ self ].
 	aText asString = '' ifTrue: [ time := timeNow - 10 ].
 	(timeNow - self time) > 5 ifFalse: [ ^ self ].
 	self isChanging: true.
-	self updateTextWith:"privateText" aText.
+	self updateTextWith:"privateText" txt.
 	self isChanging: false.
 ]
