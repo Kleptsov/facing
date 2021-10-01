@@ -94,7 +94,7 @@ FMorphTreeModel >> treeMorph [
 			resizerWidth: 2;
 			columnInset: 4; 
 			rowInset: 4; 
-			keystrokeActionSelector: #keyStroke:;
+			"keystrokeActionSelector: #keyStroke:;"
 			"preferedPaneColor: Color white;"
 			"multiSelection: self multiSelection;
 			autoMultiSelection: self autoMultiSelection;"

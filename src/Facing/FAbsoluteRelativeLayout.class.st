@@ -7,7 +7,7 @@ Class {
 		'box',
 		'direction'
 	],
-	#category : #'Facing-Morphs'
+	#category : #'Facing-Layout'
 }
 
 { #category : #examples }
